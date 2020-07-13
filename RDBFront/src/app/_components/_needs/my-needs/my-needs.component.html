@@ -1,0 +1,64 @@
+<div class="container" style="margin-top: 70px;">
+    <h1 class="h1 text-center">Mes besoins</h1>
+
+    <form>
+      <div class="form-group form-inline">
+        Recherche : 
+        <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="needService.searchTerm"/>
+        <span class="ml-3" *ngIf="needService.loading$ | async">En attente...</span>
+      </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" sortable="title" (sort)="onSort($event)">Titre</th>
+          <th scope="col" sortable="category.type" (sort)="onSort($event)">Catégorie</th>
+          <th>Description</th>
+          <th scope="col" sortable="votes" (sort)="onSort($event)">Votes</th>
+          <th>Création</th>
+          <th>Modification</th>
+          <th>Modifier le besoin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let need of myNeeds | async">
+          <td scope="row">
+            <ngb-highlight [result]="need.title" [term]="needService.searchTerm"></ngb-highlight>
+          </td>
+          <td> 
+            <ngb-highlight [result]="need.category.type" [term]="needService.searchTerm"></ngb-highlight>
+          </td>
+          <td> 
+            <ngb-highlight [result]="need.description" [term]="needService.searchTerm"></ngb-highlight>
+          </td>
+          <td> 
+            <ngb-highlight [result]="need.votes | number" [term]="needService.searchTerm"></ngb-highlight>
+          </td>
+          <td> 
+            {{ need.creationdate | date : "d/M/y"}}
+          </td>
+          <td>
+            {{ need.lasmodifieddate | date : "d/M/y"}}
+          </td>
+          <td>
+            <button class="btn-primary" 
+               (click)="navigateToModifyNeed(need)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="(myTotalNeeds | async)!" [(page)]="needService.page" [pageSize]="needService.pageSize">
+      </ngb-pagination>
+      
+      <select class="custom-select" style="width: auto;" name="pageSize" [(ngModel)]="needService.pageSize">
+        <option [ngValue]="4">4 besoins par page</option>
+        <option [ngValue]="6">6 besoins par page</option>
+        <option [ngValue]="8">8 besoins par page</option>
+        <option [ngValue]="10">10 besoins par page</option>
+
+      </select>
+    </div>
+  </form>

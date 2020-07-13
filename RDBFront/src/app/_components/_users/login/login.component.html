@@ -1,0 +1,53 @@
+<div class="container">
+    <img class="logo" src="assets/img/Logo-hd-rent-a-car.png">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h1 class="h1 card-title text-center">Connexion</h1>
+                    <div class="mainWrapper">
+                        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="loginForm form-signin">
+                            <div class="formContainer">
+                                <div class="divFlexContainerCol">
+                                    <div class="form-label-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" placeholder="email@domaine.com"
+                                            class="borderRadius form-control" formControlName="email"
+                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                <div *ngIf="f.email.errors.required">Merci d'entrer un Email</div>
+                                                <div *ngIf="f.email.errors.email">L'email doit être valide</div>
+                                            </div>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" id="password"
+                                            placeholder="Entrez votre mot de passe"
+                                            class="borderRadius form-control" required formControlName="password"
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <div *ngIf="f.password.errors.required">Mot de passe manquant</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <hr class="my-4">
+                                    <div class="text-center" style="margin: 5px 0px 5px 0px;">
+                                    <button id="submit"
+                                        class="button btn btn-lg btn-primary"
+                                        type="submit">Se connecter</button>
+                                    </div>
+                                    <div class="text-center" style="margin: 5px 0px 5px 0px;">
+                                    <button 
+                                        class="button btn btn-lg btn-outline-secondary"
+                                        (click)="navigateToRegister()">Créer un compte</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

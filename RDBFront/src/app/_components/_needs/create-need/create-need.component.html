@@ -1,0 +1,55 @@
+<div class="container" style="margin-top: 70px;">
+    <h1 class="h1 text-center">Créer un besoin</h1>
+    <div class="mainWrapper">
+      <div class="align-content-center card-body space">
+        Vous pouvez créer un besoin qui sera sauvegardé et que nous pourrons consulter pour la création de l'ERP.
+        Merci d'entrer le plus de détails possible afin que nous puissions traiter cette demande par la suite.
+      </div>
+
+      <form [formGroup]="needForm" (ngSubmit)="createNeed(needForm.value)" class="form-group">
+        <div class="form">
+            <div class="form-group">
+                <label for="inputCategory">Choisissez une catégorie</label>
+                <select class="form-control" 
+                formControlName="inputCategory"
+                id="inputCategory">
+                    <option *ngFor="let category of categories; let i = index" [value]="categories[i].type">
+                       {{ categories[i].type }} - {{ categories[i].description }}
+                    </option>
+                </select>
+            </div>
+          <div class="form-group">
+            <label for="inputTitle">Titre du besoin</label>
+            <input type="text" class="form-control" 
+             id="inputTitle" placeholder="Titre du besoin"
+             formControlName="inputTitle"
+            [ngClass]="{ 'is-invalid' : submitted && f.inputTitle.errors }">
+            <div *ngIf="submitted && f.inputTitle.errors" class="invalid-feedback">
+              <div *ngIf="f.inputTitle.errors.required">Merci d'entrer un titre</div>
+              <div *ngIf="f.inputTitle.errors.minlength">Le titre doit faire au moins 6 caractères</div>
+            </div>
+          </div>
+        <div class="form-group">
+          <label for="inputDesc">Description du besoin</label>
+          <textarea type="text" class="form-control" 
+           id="inputDesc" placeholder="Description du besoin"
+           formControlName="inputDesc"
+           [ngClass]="{ 'is-invalid' : submitted && f.inputDesc.errors }"></textarea>
+           <div *ngIf="submitted && f.inputDesc.errors" class="invalid-feedback">
+            <div *ngIf="f.inputDesc.errors.required">Merci d'entrer une description</div>
+            <div *ngIf="f.inputDesc.errors.minlength">La description doit faire au moins 20 caractères</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input id="inputAnonymous" type="checkbox" formControlName="inputAnonymous" />
+          <label for="inputAnonymous" class="form-check-label" style="margin: 0px 5px 0px 5px;">
+            Rendre ce besoin anonyme
+          </label>
+        </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Créer mon besoin</button>
+      </form>
+
+    </div>
+</div>

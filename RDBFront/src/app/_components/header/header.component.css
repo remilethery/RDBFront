@@ -1,0 +1,13 @@
+.navbar-brand{
+    cursor: pointer;
+}
+
+.nav-item {
+    padding: 2px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.logo {
+    height: 20px;
+}

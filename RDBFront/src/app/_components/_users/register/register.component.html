@@ -1,0 +1,83 @@
+<div class="container">
+    <img class="logo" src="assets/img/Logo-hd-rent-a-car.png">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h1 class="h1 card-title text-center">Création de compte</h1>
+                    <div class="mainWrapper">
+
+                        <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)" class="form-signin">
+                            <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" 
+                                 class="form-control" 
+                                 id="email" 
+                                 placeholder="Votre email"
+                                 formControlName="email"
+                                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Merci d'entrer un Email</div>
+                                    <div *ngIf="f.email.errors.email">L'email doit être valide</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" 
+                                 class="form-control" 
+                                 id="password" 
+                                 formControlName="password"
+                                 placeholder="Mot de passe"
+                                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+                                    <div *ngIf="f.password.errors.minlength">8 caractères requis</div>
+                                    <div *ngIf="f.password.errors.pattern">Doit inclure une majuscule, une minuscule et un chiffre</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="passwordVerification">Répéter le mot de passe</label>
+                                <input type="password" 
+                                 class="form-control" 
+                                 id="passwordVerification"
+                                 formControlName="passwordVerification" 
+                                 placeholder="Répéter le mot de passe"
+                                 [ngClass]="{ 'is-invalid': submitted && f.passwordVerification.errors }" />
+                                 <div *ngIf="submitted && f.passwordVerification.errors" class="invalid-feedback">
+                                    <div *ngIf="f.passwordVerification.errors.required">Merci de répéter le mot de passe</div>
+                                    <div *ngIf="f.passwordVerification.errors.mustMatch">Les mots de passe sont différents</div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fullname">Nom complet</label>
+                                <input type="text" 
+                                 class="form-control" 
+                                 id="fullname" 
+                                 formControlName="fullname"
+                                 placeholder="Ex: Jean Dubois"
+                                 [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+                                 <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.fullname.errors.required">Merci d'entrer un nom</div>
+                                    <div *ngIf="f.fullname.errors.minlength">Merci d'entrer un nom</div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button
+                                type="submit" 
+                                class="btn btn-primary"
+                                style="margin: 0px 5px 0px 5px;">Créer un compte</button>
+                                <button 
+                                type="reset"
+                                class="btn btn-secondary"
+                                style="margin: 0px 5px 0px 5px;" 
+                                (click)="onEmpty()">Recommencer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
